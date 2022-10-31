@@ -54,7 +54,9 @@ const deleteTask = async (req, res) => {
 const updateTask = async (req, res) => {
     try {
         const { id: taskID } = req.params;
-        const task = await Task.findOneAndUpdate({_id: taskID}, req.body);
+        // as third argument, after the sending req.body we can pass  {new : true, runValidators: true} 
+        // to get the updated document and to run the validators
+        const task = await Task.findOneAndUpdate({_id: taskID}, req.body, {new : true, runValidators: true});
         if (!task) {
             return res.status(404).json({ msg: `No task with id: ${taskID}` });
         }
