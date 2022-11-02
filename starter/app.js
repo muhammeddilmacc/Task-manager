@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const connectDB = require('./db/connect');
 const notFound = require('./middleware/404');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 // middleware
 app.use(express.static('./public'));
@@ -13,6 +14,7 @@ app.use(express.json());
 // routes
 app.use('/api/v1/tasks', tasks);
 app.use(notFound);
+app.use(errorHandlerMiddleware);
 
 
 // app.get('/api/v1/tasks)        - get all the tasks
